@@ -91,10 +91,17 @@ async function run() {
 
     // Users Related
 
-    // post
+    //1- post
     app.post('/users',async(req,res)=>{
       const newUser = req.body 
       const result = await userCollection.insertOne(newUser)
+      res.send(result)
+    })
+
+    // 2- get
+    app.get('/users',async(req,res)=>{
+      const cursor = userCollection.find()
+      const result = await cursor.toArray()
       res.send(result)
     })
 
