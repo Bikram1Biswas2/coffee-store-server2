@@ -30,6 +30,7 @@ async function run() {
     await client.connect();
 
     const coffeeCollection = client.db('coffeeStoreDB').collection('coffee')
+    const userCollection = client.db('coffeeStoreDB').collection('users')
 
 
     // get the data
@@ -88,6 +89,14 @@ async function run() {
     })
 
 
+    // Users Related
+
+    // post
+    app.post('/users',async(req,res)=>{
+      const newUser = req.body 
+      const result = await userCollection.insertOne(newUser)
+      res.send(result)
+    })
 
 
     // Send a ping to confirm a successful connection
